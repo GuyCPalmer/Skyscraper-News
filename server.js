@@ -16,7 +16,9 @@ var Comment = require('./models/comment.js');
 var Article = require('./models/article.js');
 
 //set mongoose to leverage built in JS ES6 promises
+//connect to Mongo DB
 mongoose.Promise = Promise;
+//mongoose.connect(MONGODB_URI);
 
 //initialize app
 var app = express();
@@ -35,10 +37,9 @@ app.engine('handlebars', exphbs({defaultLayout: "main"}));
 app.set('view engine', 'handlebars');
 
 //mongoose and database
-mongoose.Promise = Promise;
-mongoose.connect("mongodb://localhost/SkyscraperNews", {
-  useMongoClient: true
-});
+//mongoose.Promise = Promise;
+var db = mongoose.connection;
+mongoose.connect("mongodb://localhost/SkyscraperNews")
 
 //check for errors
 db.on('error', function (error) {
@@ -55,6 +56,7 @@ var router = require('./controllers/controller.js');
 app.use('/', router);
 
 //listen on port
-app.listen(3000, function() {
-    console.log('app is listening on port 3000');
+var port = process.env.PORT || 3000;
+app.listen(port, function(){
+  console.log('Running on port: ' + port);
 });

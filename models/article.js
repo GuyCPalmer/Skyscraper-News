@@ -1,9 +1,7 @@
-import { truncateSync } from "fs";
-
 //require mongoose
 var mongoose = require("mongoose");
 //create schema
-var schema = mongoose.Schema;
+var Schema = mongoose.Schema;
 
 //create article schema
 var ArticleSchema = new Schema({
@@ -14,12 +12,12 @@ var ArticleSchema = new Schema({
     },
     //link is a required string
     link: {
-        type: string,
+        type: String,
         required: true
     },
     //summary is required
     summary: {
-        type: string,
+        type: String,
         required: true
     },
     //this should savee only one comment's ObjectId, ref refers to the comment model
