@@ -1,0 +1,117 @@
+<!-- menu -->
+<div class = "ui inverted menu">
+    <a class= "active item">Home</a>
+    {{!-- <a class="item">Scrape New Articles</a>
+    <a class="item">Saved Articles</a> --}}
+</div>
+
+<div class="ui container">
+<!--Header-->
+<h2 class="ui aligned center icon header">
+    <i class="building icon"></i>
+    <div class="content">
+        <p>Skyscrapers</p>
+        <div class="sub header"><p id="subHeader">Latest Building News In One Place</p></div>
+    </div>
+</h2>
+</div>
+
+<!--articles-->
+{{#each article}}
+
+<table class="ui selectable table">
+    <thread>
+        <tr>
+            <th>{{this.title}}</th>
+        </tr>
+    </thread>
+    <tbody>
+        <tr>
+            <td>{{this.summery}}</td>
+        </tr>
+        <tr>
+            <td><a href="{{this.link}}"><i class="newspaper icon"></i>View Article</a></td>
+        </tr>
+        <tr>
+            <td>
+                <div id="addCommnet" class="ui basic buttons">
+                    <div id="addComment" class="ui right button">
+                        <i class="write icon"></i>Add Comment
+                    </div>
+                </div>
+                <div id="viewCommnet" class="ui basic buttons">
+                    <div id="viewComment" class="ui right button">
+                        <i class="comments outline icon"></i>View Comment
+                    </div>
+                </div>
+                {{!-- <div id="add" class="ui basic buttons">
+                    <div id="add" class="ui right button">
+                        <i class="newspaper icon"></i>Save Article
+                    </div>
+                </div> --}}
+            </td>
+        </tr>
+    </tbody>
+</table>
+<br>
+
+<!--comment modal-->
+<div class="ui modal" id="comment">
+    <div class="ui form" id="form-add={{_id}}" action="add/comment/{{_id}}" method="post">
+        <div class="field">
+            <label>Short Text</label>
+            <textarea id="bodyInput" rows"4"></textarea>
+        </div>
+    </div>
+    <div id="save" class="ui submit button" data-id="{{_id}}" type="submit" value="submit">
+        <div id="save" class="ui small right button">
+            Save Comment
+        </div>
+    </div>
+</div>
+
+<!--view comments modal-->
+<div class="ui modal" id="view">
+    <i class="close icon"></i>
+     {{!-- {{#if comment}} --}}
+    <div class="header">{{title}}</div>
+     {{#each comments}}
+    <div class="content">
+        <div class="description">
+            <p>{{this.comment}}</p>
+        </div>
+    </div>
+    <div class="ui submit button" id="form-delete-{{_id}}" action="delete/comment/{{_id}}" method="post">
+        <div id="delete" class="ui small right button">
+            Delete Comment
+        </div>
+    </div>
+     {{/each}}
+     {{!-- {{/if}} --}}
+</div>
+
+
+{{/each}}
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
