@@ -13,10 +13,16 @@ var Comment = require('../models/comment.js'),
 
 //routes
 
-//index pare render
+//index page render
+router.get('/', function (req, res){
+    // Scrape data
+    res.redirect('/scrape');
+  });
+
+//get request to scrape the website
 router.get('/scrape', function (req, res) {
     //first grab the body of the html with request
-    request("https://www.designboom.com/architecture", function(error, response, html) {
+    request("https://www.archdaily.com/", function(error, response, html) {
         //load into cheerio and save it to $ for shorthand selector
         var $ = cheerio.load(html);
         //now grab every h2
@@ -25,8 +31,8 @@ router.get('/scrape', function (req, res) {
             var result = {};
 
             //add the text and href of every link and save them as property of result object
-            result.title = $(this).children("h1").text();
-            result.link = $(this).find("h1").find("a").attr("href");
+            result.title = $(this).children("h2").text();
+            result.link = $(this).find("h2").find("a").attr("href");
             result.summary = $(this).children("p.teaser").text();
 
             //using article model, create new entry
