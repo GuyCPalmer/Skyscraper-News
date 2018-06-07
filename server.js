@@ -15,10 +15,13 @@ const cheerio = require('cheerio'),
 var Comment = require('./models/comment.js');
 var Article = require('./models/article.js');
 
+// If deployed, use the deployed database. Otherwise use the local mongoHeadlines database
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/articlesdb";
+
 //set mongoose to leverage built in JS ES6 promises
 //connect to Mongo DB
 mongoose.Promise = Promise;
-//mongoose.connect(MONGODB_URI);
+mongoose.connect(MONGODB_URI);
 
 //initialize app
 var app = express();
@@ -39,7 +42,7 @@ app.set('view engine', 'handlebars');
 //mongoose and database
 //mongoose.Promise = Promise;
 var db = mongoose.connection;
-mongoose.connect("mongodb://localhost/SkyscraperNews")
+//mongoose.connect("mongodb://localhost/articlesdb")
 
 //check for errors
 db.on('error', function (error) {

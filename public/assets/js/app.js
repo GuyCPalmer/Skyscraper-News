@@ -45,7 +45,6 @@ $(document).ready(function() {
   
     });
   
-  
     // Click Listener for FORM SUBMISSION to DELETE a comment
     $('.delete-comment-button').on('click', function(){
   

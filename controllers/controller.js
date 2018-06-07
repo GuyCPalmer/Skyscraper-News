@@ -14,9 +14,9 @@ var Comment = require('../models/comment.js'),
 //routes
 
 //index pare render
-router.get('/', function (req, res) {
+router.get('/scrape', function (req, res) {
     //first grab the body of the html with request
-    request("https://www.designboom.com/tag/skyscraper-architecture-and-design/", function(error, response, html) {
+    request("https://www.designboom.com/architecture", function(error, response, html) {
         //load into cheerio and save it to $ for shorthand selector
         var $ = cheerio.load(html);
         //now grab every h2
@@ -24,7 +24,7 @@ router.get('/', function (req, res) {
             //save an empty result object
             var result = {};
 
-            //add the text and href of every link and save them as property of reult object
+            //add the text and href of every link and save them as property of result object
             result.title = $(this).children("h1").text();
             result.link = $(this).find("h1").find("a").attr("href");
             result.summary = $(this).children("p.teaser").text();
