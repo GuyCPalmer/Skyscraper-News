@@ -5,7 +5,8 @@ var express = require("express"),
     logger = require("morgan"),
     mongoose = require("mongoose"),
     request = require("request"),
-    cheerio = require("cheerio");
+    cheerio = require("cheerio"),
+    axios = require("axios");
 
 //import the comment and article models
 var Comment = require('../models/comment.js'),
@@ -22,18 +23,23 @@ router.get('/', function (req, res){
 //get request to scrape the website
 router.get('/scrape', function (req, res) {
     //first grab the body of the html with request
-    request("https://www.archdaily.com/", function(error, response, html) {
+    axios.get("https://www.archdaily.com").then(function(response) {
+        //console.log(response);
         //load into cheerio and save it to $ for shorthand selector
-        var $ = cheerio.load(html);
+        let $ = cheerio.load(response.data);
         //now grab every h2
-        $("div.item-info").each(function(i, element) {
+        $(".afd-title-big afd-title-big--bmargin-small afd-mobile-margin").each(function(i, element) {
+            //console.log("HERE");
             //save an empty result object
             var result = {};
 
             //add the text and href of every link and save them as property of result object
-            result.title = $(this).children("h2").text();
-            result.link = $(this).find("h2").find("a").attr("href");
-            result.summary = $(this).children("p.teaser").text();
+            var span= $(this).find("h3 a class").text();
+            console.log(span);
+
+            result.link = $(this).children("h3").text
+            result.link = $(this).children("afd-title--black-link").attr("hrefafd-title--black-link");
+            //result.summary = $(this).children("p.teaser").text();
 
             //using article model, create new entry
             //this passes the result object to the entry
@@ -51,7 +57,8 @@ router.get('/scrape', function (req, res) {
                 }
             });
         });
-    });
+    }).catch(err => console.log(err));
+
     res.redirect("/articles");
 });
 
@@ -59,12 +66,14 @@ router.get('/scrape', function (req, res) {
 router.get("/articles", function(req, res) {
     //grab every doc in the article array
     Article.find({}, function(err, doc) {
+        console.log(doc);
         //log errors
         if (err) {
             console.log(err);
         }
         //or store doc in hbsObject and render to index
         else {
+
             var hbsObject = {article: doc};
             return res.render('index', hbsObject);
         }

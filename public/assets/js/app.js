@@ -22,11 +22,10 @@ $(document).ready(function() {
       // Get _id of comment to be deleted
       var articleId = $(this).data("id");
   
-      // URL root (so it works in eith Local Host for Heroku)
-      var baseURL = window.location.origin;
+
   
       // Get Form Data by Id
-      var formName = "form-add-" + articleId;
+      var formName = "form-add" + articleId;
       var form = $('#' + formName);
   
   

@@ -13,14 +13,14 @@ var ArticleSchema = new Schema({
     //link is a required string
     link: {
         type: String,
-        required: true
+        required: false
     },
     //summary is required
     summary: {
         type: String,
-        required: true
+        required: false
     },
-    //this should savee only one comment's ObjectId, ref refers to the comment model
+    //this should save only one comment's ObjectId, ref refers to the comment model
     comment: [{
         type: Schema.Types.ObjectId,
         ref: "Comment"

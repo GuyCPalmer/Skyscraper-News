@@ -1,7 +1,26 @@
 p {
-    font-size: 45px;
+    font-size: 55px;
     margin: 0;
 }
-#subHeader {
+p#subHeader {
     font-size: 20px;
+}
+
+.table {
+    padding: 0px; 
+    max-width: 95%;
+}
+
+.thread {
+    padding: 40px;
+}
+
+th {
+    padding: 15px;
+    background-color: rgba(242, 246, 248, 0.925);
+    border: 1px solid lightgray;
+}
+
+tbody {
+    background-color: white;
 }

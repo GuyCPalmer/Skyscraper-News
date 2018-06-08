@@ -5,7 +5,8 @@ const express = require('express'),
       hbs = require('handlebars'),
       bodyParser = require('body-parser'),
       logger = require('morgan'),
-      path = require('path'); 
+      path = require('path'),
+      axios = require("axios");
 
 //scraping tools
 const cheerio = require('cheerio'),

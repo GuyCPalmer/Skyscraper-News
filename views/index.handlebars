@@ -18,7 +18,7 @@
 
 <!--articles-->
 {{#each article}}
-
+<div class="ui aligned center container">
 <table class="ui selectable table">
     <thread>
         <tr>
@@ -26,10 +26,10 @@
         </tr>
     </thread>
     <tbody>
-        <tr>
+        {{!--<tr>
             <td>{{this.summery}}</td>
         </tr>
-        <tr>
+        <tr>--}}
             <td><a href="{{this.link}}"><i class="newspaper icon"></i>View Article</a></td>
         </tr>
         <tr>
@@ -53,13 +53,13 @@
         </tr>
     </tbody>
 </table>
-<br>
+</div>
 
 <!--comment modal-->
 <div class="ui modal" id="comment">
     <div class="ui form" id="form-add={{_id}}" action="add/comment/{{_id}}" method="post">
         <div class="field">
-            <label>Short Text</label>
+            <label>Insert Comment Below</label>
             <textarea id="bodyInput" rows"4"></textarea>
         </div>
     </div>
